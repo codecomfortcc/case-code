@@ -6,6 +6,7 @@ import Phone from "@/components/phone";
 import { Icons } from "./utils/icons";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
+import {Reviews} from "@/components/reviews";
 export default function Home() {
   return (
     <div className="bg-slate-50">
