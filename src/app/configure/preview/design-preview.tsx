@@ -12,27 +12,22 @@ import { useMutation } from "@tanstack/react-query";
 import { createCheckoutSession } from './actions'
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import LoginModal from "@/components/login-modal";
 
 
 const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
-  const [showConfetti, setShowConfetti] = useState(false);
-  const {toast}=useToast()
-  const router=useRouter()
-  const { color, model, finish, material } = configuration
-  const tw = COLORS.find((supportedColor) => supportedColor.value === color)?.tw
-  const { label: modelLabel } = MODELS.options.find(
-    ({ value }) => value === model
-  )!
-
-  let totalPrice = BASE_PRICE
-  if (material === 'polycarbonate')
-    totalPrice += PRODUCT_PRICES.material.polycarbonate
-  if (finish === 'textured') totalPrice += PRODUCT_PRICES.finish.textured
-
+  const [showConfetti, setShowConfetti] = useState<boolean>(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false)
+ 
   useEffect(() => {
     setShowConfetti(true);
   });
-  const { mutate: createPaymentSession } = useMutation({
+
+  const {toast}=useToast()
+  const router=useRouter()
+  const { user } = useKindeBrowserClient()
+  const { mutate: createPaymentSession,isPending } = useMutation({
     mutationKey: ['get-checkout-session'],
     mutationFn: createCheckoutSession,
     onSuccess: ({ url }) => {
@@ -48,6 +43,28 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
     },
   })
 
+  const { color, model, finish, material, id } = configuration
+  let totalPrice = BASE_PRICE
+
+  const tw = COLORS.find((supportedColor) => supportedColor.value === color)?.tw
+  const { label: modelLabel } = MODELS.options.find(
+    ({ value }) => value === model
+  )!
+
+  if (material === 'polycarbonate')
+    totalPrice += PRODUCT_PRICES.material.polycarbonate
+  if (finish === 'textured') totalPrice += PRODUCT_PRICES.finish.textured
+
+  const handleCheckout = () => {
+    if (user) {
+      // create payment session
+      createPaymentSession({ configId: id })
+    } else {
+      // need to log in
+      localStorage.setItem('configurationId', id)
+      setIsLoginModalOpen(true)
+    }
+  }
 
   return (
     <>
@@ -59,6 +76,8 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
         config={{ elementCount: 200, spread: 90 }}
       />
     </div>
+    <LoginModal isOpen={isLoginModalOpen} setIsOpen={setIsLoginModalOpen} />
+
     <div className='mt-20 flex flex-col items-center md:grid text-sm sm:grid-cols-12 sm:grid-rows-1 sm:gap-x-6 md:gap-x-8 lg:gap-x-12'>
       <div className='md:col-span-4 lg:col-span-3 md:row-span-2 md:row-end-2'>
         <Phone
@@ -138,7 +157,8 @@ const DesignPreview = ({ configuration }: { configuration: Configuration }) => {
 
           <div className='mt-8 flex justify-end pb-12'>
             <Button
-            onClick={() => createPaymentSession({ configId: configuration.id})}
+            isLoading={isPending}
+            onClick={() => handleCheckout()}
               className='px-4 sm:px-6 lg:px-8'>
               Check out <ArrowRight className='h-4 w-4 ml-1.5 inline' />
             </Button>
