@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Case Code - A Modern Fullstack E-Commerce Shop for Custom Phone Cases
 
-## Getting Started
+Built with the Next.js 14 App Router, Postgres, TypeScript, Tailwind & Kinde Auth
 
-First, run the development server:
+## 🚀 About Me
+my name is yasovardhan.
+I'm a full stack developer...
+
+## Features
+
+- 🛠️ Complete shop built from scratch in Next.js 14
+- 💻 Build a beautiful landing page to showcase your custom phone cases.
+- 🎨 Incorporate unique, professional artwork by a talented illustrator.
+- 💳 Manage customer orders with a hidden admin dashboard featuring drag-and-drop functionality for managing files.
+- 🖥️ Allow customers to purchase directly from your shop with a secure checkout.
+- 🛍️ Utilize the clean and modern UI built on top of the shadcn-ui framework.
+- 🛒 Empower customers to design their dream phone cases with complete customization options.
+- 🔑 Ensure secure access with user authentication powered by Kinde
+- ✉️Show appreciation with a beautiful thank-you email after every purchase.
+- ✅ Provide a familiar and intuitive configuration experience inspired by Apple's design language.
+- ⌨️ Enjoy the benefits of 100% TypeScript for a robust and maintainable codebase.
+- 🎁 ...much more
+
+## Getting started
+
+To get started with this project, run
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  git clone https://github.com/yashovardhannagasiva/code-case.git
+```
+Install dependencies
+
+```bash
+  npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+to run locally
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+  npm run dev
+  ```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+to build project 
 
-## Learn More
+```bash
+  npm run build
+  ```
 
-To learn more about Next.js, take a look at the following resources:
+## Environment Variables
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+To run this project, you will need to add the following environment variables to your .env file
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Kinde environment variables
 
-## Deploy on Vercel
+`KINDE_CLIENT_ID`
+`KINDE_CLIENT_SECRET`
+`KINDE_ISSUER_URL`
+`KINDE_SITE_URL`
+`KINDE_POST_LOGOUT_REDIRECT_URL`
+`KINDE_POST_LOGIN_REDIRECT_URL`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Admin Mail
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+`ADMIN_EMAIL`
+
+### Uploadthing env variables
+`UPLOADTHING_SECRET`
+`UPLOADTHING_APP_ID`
+
+### Stripe environment variables
+
+`STRIPE_SECRET_KEY`
+`STRIPE_WEBHOOK_SECRET`
+
+### Resend environment variable
+
+`RESEND_API_KEY`
+
+### Next server environment variable
+
+`NEXT_PUBLIC_SERVER_URL`
+
+
+### Database environment variable
+
+`DATABASE_URL`
+
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
