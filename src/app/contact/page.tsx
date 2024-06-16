@@ -1,14 +1,12 @@
-'use client';
+import React from 'react';
 
-import React, { useEffect } from 'react';
-
-const TermsAndConditions = () => {
-  useEffect(() => {
-    const pdfUrl = '/policy/website_contactUs_703369.pdf'; // Update this to match your PDF file location
-    window.open(pdfUrl, );
-  }, []);
-
-  return null; // Return null to indicate no visual content
+const ContactPage = () => {
+  return (
+    <div>
+      <h1>Contact Page</h1>
+      <p> page under construction</p>
+    </div>
+  );
 };
 
-export default TermsAndConditions;
+export default ContactPage;
